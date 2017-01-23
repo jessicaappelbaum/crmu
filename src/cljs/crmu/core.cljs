@@ -13,23 +13,33 @@
 
 (defn home-page []
   [ui/mui-theme-provider
-   {:mui-theme (get-mui-theme {:palette {:text-color (color :green600)}})}
+   {:mui-theme (get-mui-theme {:font-family "serif"
+                               :palette {:text-color (color :green600)
+                                         :border-color :purple
+                                         :primary-1-color :purple
+                                         :primary-2-color :purple
+                                         :primary-3-color :purple}})}
    [:div
     [ui/app-bar {:title "Title"
                  :icon-element-right (r/as-element [ui/icon-button (ic/action-account-balance-wallet)])}]
     [ui/paper
-     [:div "Hello"
-      [:a {:href "/about"} "go to about page"]]
+     [ui/paper [:div "Hello"]]
+     [:div [:a {:href "/about"} "go to about page"]]
      [ui/mui-theme-provider
       {:mui-theme (get-mui-theme {:palette {:text-color (color :blue200)}})}
       [ui/raised-button {:label "Blue button"}]]
-     [ui/raised-button {:label "Green button"}]
+     [ui/raised-button {:label "Green button"
+                        :style {:margin-left "50px"}}]
      (ic/action-flight-takeoff)
      (ic/action-home {:color (color :grey600)})
      [ui/raised-button {:label "Click me"
                         :icon (ic/social-group)
                         :on-touch-tap #(println "clicked")}]
-     [ui/raised-button {:on-touch-tap #(println "clicked")}]]]])
+     [ui/toggle]
+     [ui/radio-button-group {:name "radio-group"
+                             :defaultSelected "not_light"}
+      [ui/radio-button {:value "not_light"
+                        :label "Simple"}]]]]])
 
 (defn about-page []
   [:div [:h2 "About crmu"]
